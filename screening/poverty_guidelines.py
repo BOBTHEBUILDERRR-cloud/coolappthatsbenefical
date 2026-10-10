@@ -32,6 +32,8 @@ POVERTY_GUIDELINES_2026 = {
 
 
 def poverty_line(household_size):
+    if household_size < 1:
+        raise ValueError(f"Household size must be at least 1, got {household_size}")
     base = POVERTY_GUIDELINES_2026["base"]
     increment = POVERTY_GUIDELINES_2026["increment"]
     return base + increment * (household_size - 1)
@@ -39,6 +41,55 @@ def poverty_line(household_size):
 
 
 
+
     
 def fpl_percentage(annual_income, household_size):
+    if household_size < 1:
+        raise ValueError(f"Household size must be at least 1, got {household_size}")
+    if annual_income < 0:
+        raise ValueError(f"Annual income must be a non-negative number, got {annual_income}")
     return annual_income / poverty_line(household_size) * 100
+    
+
+
+
+def screen(household, programs=None):
+    from screening.program_rules import PROGRAMS, check_rule
+
+    if programs is None:
+        selected_programs = PROGRAMS
+    else:
+        if isinstance(programs, str):
+            programs = [programs]
+
+        lookup = {program["id"]: program for program in PROGRAMS}
+        selected_programs = []
+        for program in programs:
+            if isinstance(program, str):
+                if program not in lookup:
+                    raise ValueError(f"Unknown program id: {program}")
+                selected_programs.append(lookup[program])
+            else:
+                selected_programs.append(program)
+
+    results = []
+
+    for program in selected_programs:
+        qualifies = True
+        explanations = []
+
+        for rule in program["rules"]:
+            passed, explanation = check_rule(rule, household)
+            explanations.append(explanation)
+            if not passed:
+                qualifies = False
+
+        results.append({
+            "program_id": program["id"],
+            "name": program["name"],
+            "qualifies": qualifies,
+            "explanations": explanations,
+            "apply_url": program["apply_url"],
+        })
+
+    return results

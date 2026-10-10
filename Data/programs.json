@@ -1,0 +1,130 @@
+{
+  "notes": "Need to verify this data is accurate. Relevant data in place right now",
+  "programs": [
+    {
+      "id": "calfresh",
+      "name": "CalFresh (SNAP)",
+      "agency": "California Department of Social Services",
+      "apply_url": "https://www.getcalfresh.org",
+      "source_url": "https://www.cdss.ca.gov/lettersnotices/entres/getinfo/acl/2014/14-56.pdf",
+      "retrieved": "2026-09-14",
+      "rules": [
+        {"type": "income_below_fpl_pct", "value": 200},
+        {"type": "state_residency", "value": "CA"}
+      ],
+      "benefit_value": {
+        "type": "snap_allotment",
+        "max_monthly_by_size": {"1": 298, "2": 546, "3": 785, "4": 994},
+        "reduction_rate": 0.30
+      },
+      "documents": [
+        "Photo ID",
+        "Pay stubs from the last 30 days",
+        "Rent receipt or mortgage statement",
+        "Utility bills"
+      ]
+    },
+    {
+      "id": "medi_cal",
+      "name": "Medi-Cal",
+      "agency": "California Department of Health Care Services",
+      "apply_url": "https://www.coveredca.com",
+      "source_url": "https://www.dhcs.ca.gov/medi-cal/qualify/qualify-for-medi-cal-eligibility-chart/",
+      "retrieved": "2026-09-14",
+      "rules": [
+        {"type": "income_below_fpl_pct", "value": 138},
+        {"type": "state_residency", "value": "CA"}
+      ],
+      "benefit_value": {
+        "type": "coverage",
+        "estimated_annual_value_per_person": 6000
+      },
+      "documents": [
+        "Photo ID",
+        "Proof of income",
+        "Social Security numbers for everyone applying",
+        "Proof of California residency"
+      ]
+    },
+    {
+      "id": "school_meals_free",
+      "name": "Free school meals",
+      "agency": "USDA Food and Nutrition Administration",
+      "apply_url": "https://www.fna.usda.gov/schoolmeals",
+      "source_url": "https://www.fna.usda.gov/schoolmeals/income-eligibility-guidelines",
+      "retrieved": "2026-09-14",
+      "rules": [
+        {"type": "income_below_fpl_pct", "value": 130},
+        {"type": "has_child_under", "value": 19}
+      ],
+      "benefit_value": {
+        "type": "flat_per_child",
+        "value_per_child_per_day": 7,
+        "school_days_per_year": 180
+      },
+      "documents": [
+        "Household income for everyone who lives with you",
+        "Names and schools of each child"
+      ]
+    },
+    {
+      "id": "school_meals_reduced",
+      "name": "Reduced-price school meals",
+      "agency": "USDA Food and Nutrition Administration",
+      "apply_url": "https://www.fna.usda.gov/schoolmeals",
+      "source_url": "https://www.fna.usda.gov/schoolmeals/income-eligibility-guidelines",
+      "retrieved": "2026-09-14",
+      "rules": [
+        {"type": "income_below_fpl_pct", "value": 185},
+        {"type": "has_child_under", "value": 19}
+      ],
+      "benefit_value": {
+        "type": "flat_per_child",
+        "value_per_child_per_day": 5,
+        "school_days_per_year": 180
+      },
+      "documents": [
+        "Household income for everyone who lives with you",
+        "Names and schools of each child"
+      ]
+    },
+    {
+      "id": "care",
+      "name": "California Alternate Rates for Energy (CARE)",
+      "agency": "California Public Utilities Commission",
+      "apply_url": "https://www.cpuc.ca.gov/care/",
+      "source_url": "https://www.cpuc.ca.gov/care/",
+      "retrieved": "2026-10-10",
+      "rules": [
+        {
+          "type": "income_below_annual_limit_by_size",
+          "value": {
+            "limits_by_size": {
+              "1": 43280,
+              "2": 43280,
+              "3": 54640,
+              "4": 66000,
+              "5": 77360,
+              "6": 88720,
+              "7": 100080,
+              "8": 111440
+            },
+            "additional_person_limit": 11360
+          }
+        },
+        {"type": "state_residency", "value": "CA"}
+      ],
+      "benefit_value": {
+        "type": "utility_bill_discount",
+        "electric_percentage_min": 30,
+        "electric_percentage_max": 35,
+        "small_utility_electric_percentage": 20,
+        "natural_gas_percentage": 20
+      },
+      "documents": [
+        "Contact your utility for a CARE application and current documentation requirements"
+      ],
+      "notes": "Income limits are effective June 1, 2026 through May 31, 2027. Electric discounts are 30-35% at larger utilities and 20% at smaller utilities. CPUC also lists categorical eligibility through specified assistance programs and requires service from a participating utility; the screener does not evaluate either condition. The source checked does not specify whether annual income is gross or net; confirm the definition before relying on this result."
+    }
+  ]
+}
