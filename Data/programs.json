@@ -127,6 +127,52 @@
       "notes": "Income limits are effective June 1, 2026 through May 31, 2027. Electric discounts are 30-35% at larger utilities and 20% at smaller utilities. CPUC also lists categorical eligibility through specified assistance programs and requires service from a participating utility; the screener does not evaluate either condition. The source checked does not specify whether annual income is gross or net; confirm the definition before relying on this result."
     },
     {
+      "id": "fera",
+      "name": "Family Electric Rate Assistance Program (FERA)",
+      "agency": "California Public Utilities Commission",
+      "apply_url": "https://www.cpuc.ca.gov/industries-and-topics/electrical-energy/electric-costs/care-fera-program",
+      "source_url": "https://www.cpuc.ca.gov/industries-and-topics/electrical-energy/electric-costs/care-fera-program",
+      "retrieved": "2026-10-17",
+      "rules": [
+        {
+          "type": "income_between_annual_limits_by_size",
+          "value": {
+            "minimum_limits_by_size": {
+              "1": 43281,
+              "2": 43281,
+              "3": 54641,
+              "4": 66001,
+              "5": 77361,
+              "6": 88721,
+              "7": 100081,
+              "8": 111441
+            },
+            "maximum_limits_by_size": {
+              "1": 54100,
+              "2": 54100,
+              "3": 68300,
+              "4": 82500,
+              "5": 96700,
+              "6": 110900,
+              "7": 125100,
+              "8": 139300
+            },
+            "additional_person_minimum_limit": 11360,
+            "additional_person_maximum_limit": 14200
+          }
+        },
+        {"type": "state_residency", "value": "CA"}
+      ],
+      "benefit_value": {
+        "type": "utility_bill_discount",
+        "electric_percentage": 18
+      },
+      "documents": [
+        "Contact PG&E, SCE, or SDG&E for an application and current documentation requirements"
+      ],
+      "notes": "Income limits are effective June 1, 2026 through May 31, 2027. The screener does not check whether the household receives electric service from an eligible utility (PG&E, SCE, or SDG&E); confirm eligibility with the utility. The CPUC source does not specify whether annual income is gross or net; confirm the definition before relying on this result. FERA also includes a reduced Base Services Charge."
+    },
+    {
       "id": "clipper_start",
       "name": "Clipper START",
       "agency": "Metropolitan Transportation Commission",

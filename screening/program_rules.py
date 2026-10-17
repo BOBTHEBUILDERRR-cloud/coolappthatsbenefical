@@ -44,6 +44,40 @@ def check_rule(rule, household):
         )
         return qualifies, explanation
 
+    elif rule["type"] == "income_between_annual_limits_by_size":
+        size = household["size"]
+        if size < 1:
+            raise ValueError(f"Household size must be at least 1, got {size}")
+        if household["annual_income"] < 0:
+            raise ValueError("Annual income must be a non-negative number")
+
+        value = rule["value"]
+        minimum_limits = value["minimum_limits_by_size"]
+        maximum_limits = value["maximum_limits_by_size"]
+        minimum_limit = minimum_limits.get(str(size))
+        maximum_limit = maximum_limits.get(str(size))
+        if minimum_limit is None or maximum_limit is None:
+            largest_size = min(
+                max(int(limit_size) for limit_size in minimum_limits),
+                max(int(limit_size) for limit_size in maximum_limits),
+            )
+            if size < largest_size:
+                raise ValueError(f"No income limits configured for household size {size}")
+            minimum_limit = minimum_limits[str(largest_size)] + (
+                size - largest_size
+            ) * value["additional_person_minimum_limit"]
+            maximum_limit = maximum_limits[str(largest_size)] + (
+                size - largest_size
+            ) * value["additional_person_maximum_limit"]
+
+        qualifies = minimum_limit <= household["annual_income"] <= maximum_limit
+        explanation = (
+            f"Your household of {size} has annual income of "
+            f"${household['annual_income']:,.0f}. This program allows income "
+            f"from ${minimum_limit:,.0f} through ${maximum_limit:,.0f}."
+        )
+        return qualifies, explanation
+
     elif rule["type"] == "has_child_under":
         max_age = rule["value"]
         has_child = False

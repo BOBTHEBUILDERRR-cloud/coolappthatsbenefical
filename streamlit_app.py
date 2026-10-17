@@ -8,13 +8,32 @@ st.markdown(
     """
     <style>
     [data-testid="stAppViewContainer"] { background: #f5f6f1; }
-    [data-testid="stAppViewContainer"] * { color: #000000 !important; }
+    [data-testid="stAppViewContainer"] p,
+    [data-testid="stAppViewContainer"] div,
+    [data-testid="stAppViewContainer"] label,
+    [data-testid="stAppViewContainer"] span,
+    [data-testid="stAppViewContainer"] h1,
+    [data-testid="stAppViewContainer"] h2,
+    [data-testid="stAppViewContainer"] h3,
+    [data-testid="stAppViewContainer"] h4 {
+        color: #111827;
+    }
     .main .block-container { max-width: 850px; padding-top: 3rem; padding-bottom: 4rem; }
     [data-testid="stHeader"] { background: transparent; }
     h1 { font-family: Georgia, serif; font-weight: 500; }
     [data-testid="stNumberInput"] input,
-    [data-testid="stTextInput"] input { background: #ffffff; }
-    [data-testid="stNumberInput"] button { background: #ffffff; }
+    [data-testid="stTextInput"] input { background: #ffffff; color: #000000; }
+    [data-testid="stNumberInput"] button { background: #ffffff; color: #000000; }
+    div[data-testid="stLinkButton"] > a,
+    div[data-testid="stLinkButton"] > button,
+    button[kind="primary"],
+    button[kind="secondary"] {
+        color: #ffffff !important;
+        background-color: #1f6feb !important;
+        border: 1px solid #1f6feb !important;
+        border-radius: 0.5rem;
+        font-weight: 600;
+    }
     [data-testid="stForm"] {
         background: #ffffff;
         border: 1px solid #dfe5de;

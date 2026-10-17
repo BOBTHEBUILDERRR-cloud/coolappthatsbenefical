@@ -103,6 +103,7 @@ effective dates, and limitations the current screener cannot evaluate.
 | --- | --- | --- |
 | `income_below_fpl_pct` | Maximum percentage of 2026 FPL; equality passes | `{"type":"income_below_fpl_pct","value":200}` |
 | `income_below_annual_limit_by_size` | `limits_by_size` maps household-size strings to annual dollar limits; `additional_person_limit` extends the largest configured size; equality passes | `{"type":"income_below_annual_limit_by_size","value":{"limits_by_size":{"1":43280,"2":43280,"3":54640,"4":66000},"additional_person_limit":11360}}` |
+| `income_between_annual_limits_by_size` | Inclusive lower and upper annual dollar limits by household size; `minimum_limits_by_size` and `maximum_limits_by_size` map size strings to limits; `additional_person_minimum_limit` and `additional_person_maximum_limit` extend the largest configured size | `{"type":"income_between_annual_limits_by_size","value":{"minimum_limits_by_size":{"1":43281,"2":43281,"3":54641,"4":66001},"maximum_limits_by_size":{"1":54100,"2":54100,"3":68300,"4":82500},"additional_person_minimum_limit":11360,"additional_person_maximum_limit":14200}}` |
 | `has_child_under` | Maximum age, exclusive; at least one household member must be younger | `{"type":"has_child_under","value":19}` |
 | `state_residency` | Required state abbreviation | `{"type":"state_residency","value":"CA"}` |
 

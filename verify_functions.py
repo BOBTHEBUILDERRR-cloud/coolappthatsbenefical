@@ -151,6 +151,32 @@ assert find(screen(care_over_limit), "care")["qualifies"] is False
 care_one_person = dict(care_at_limit)
 care_one_person.update(size=1, annual_income=43280, ages=[37])
 assert find(screen(care_one_person), "care")["qualifies"] is True
+
+fera_rule = next(
+    program["rules"][0] for program in PROGRAMS if program["id"] == "fera"
+)
+fera_household = {
+    "size": 4,
+    "annual_income": 70000,
+    "state": "CA",
+    "county": "Santa Clara",
+    "ages": [37, 35, 12, 8],
+}
+fera_qualifies, fera_explanation = check_rule(fera_rule, fera_household)
+assert fera_qualifies is True
+assert "$66,001" in fera_explanation and "$82,500" in fera_explanation
+assert find(screen(fera_household), "fera")["qualifies"] is True
+fera_at_lower_limit = dict(fera_household, annual_income=66001)
+assert check_rule(fera_rule, fera_at_lower_limit)[0] is True
+fera_below_lower_limit = dict(fera_household, annual_income=66000)
+assert check_rule(fera_rule, fera_below_lower_limit)[0] is False
+fera_at_upper_limit = dict(fera_household, annual_income=82500)
+assert check_rule(fera_rule, fera_at_upper_limit)[0] is True
+fera_over_upper_limit = dict(fera_household, annual_income=82501)
+assert check_rule(fera_rule, fera_over_upper_limit)[0] is False
+fera_nine_people = dict(fera_household, size=9, annual_income=153500)
+assert check_rule(fera_rule, fera_nine_people)[0] is True
+
 try:
     check_rule(
         PROGRAMS[-1]["rules"][0],
