@@ -125,6 +125,43 @@
         "Contact your utility for a CARE application and current documentation requirements"
       ],
       "notes": "Income limits are effective June 1, 2026 through May 31, 2027. Electric discounts are 30-35% at larger utilities and 20% at smaller utilities. CPUC also lists categorical eligibility through specified assistance programs and requires service from a participating utility; the screener does not evaluate either condition. The source checked does not specify whether annual income is gross or net; confirm the definition before relying on this result."
+    },
+    {
+      "id": "clipper_start",
+      "name": "Clipper START",
+      "agency": "Metropolitan Transportation Commission",
+      "apply_url": "https://www.clipperstartcard.com/s/",
+      "source_url": "https://www.clipperstartcard.com/s/",
+      "retrieved": "2026-10-17",
+      "rules": [
+        {
+          "type": "income_below_annual_limit_by_size",
+          "value": {
+            "limits_by_size": {
+              "1": 31920,
+              "2": 43280,
+              "3": 54640,
+              "4": 66000,
+              "5": 77360,
+              "6": 88720,
+              "7": 100080,
+              "8": 111440,
+              "9": 120000
+            },
+            "additional_person_limit": 11360
+          }
+        }
+      ],
+      "benefit_value": {
+        "type": "fare_discount",
+        "percent_off": 50
+      },
+      "documents": [
+        "Photo ID",
+        "Proof of income",
+        "Proof of Bay Area residency if requested on the application"
+      ],
+      "notes": "Clipper START offers a 50% discount on Bay Area public transit. The official page states the program is income-based, requires residents of the Bay Area to be between 19 and 64, and allows CalFresh participants to qualify automatically. The screener evaluates only the income table and does not check age, Bay Area residence, or CalFresh automatic eligibility. The source says the income requirement is based on gross income before taxes."
     }
   ]
 }
